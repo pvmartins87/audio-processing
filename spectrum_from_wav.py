@@ -29,12 +29,12 @@ from scipy import signal
 from scipy.io import wavfile
 import easygui
 
-print('Defining standard variables and loading file dialog...')
 #%% USER INTERFACE - LOAD FILES
 lfreq = .1
 ufreq = 11220
 plot_all_curves = False
 
+print('Opening file dialog...')
 if 'paths' not in locals():
     paths = easygui.fileopenbox(msg='Please select the files to calculate octave bands', title='Audio Files', default='*.wav', multiple=True)
 
@@ -123,4 +123,5 @@ if plot_all_curves:
 print('Writting excel report...')
 df.to_excel(os.path.join(os.path.dirname(path), 'Generated_Report.xlsx'))
 
-print('Done! Closing...')
+print('Done! Press any key to terminate...')
+input()
