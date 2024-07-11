@@ -19,6 +19,7 @@ Use Spyder IDE to open the results variable "df" and copy it to Excel
 
 """
 
+print('Importing dependencies, please wait...')
 import os
 import sys
 import numpy as np
@@ -28,6 +29,7 @@ from scipy import signal
 from scipy.io import wavfile
 import easygui
 
+print('Defining standard variables and loading file dialog...')
 #%% USER INTERFACE - LOAD FILES
 lfreq = .1
 ufreq = 11220
@@ -39,6 +41,7 @@ if 'paths' not in locals():
 if paths is None:
     sys.exit()
 
+print('Processing selected files...')
 #%% MAIN PROG
 
 def Aweight(freq):
@@ -61,6 +64,7 @@ all_spectrograms = []
 df = pd.DataFrame(columns=colnames)
 for path in paths:
     filename = os.path.basename(path)
+
     
     sample_rate, samples = wavfile.read(path)
     try:
@@ -115,5 +119,8 @@ if plot_all_curves:
            title='Contact Mic (corrected)')
     ax.grid()
     ax.legend()
-    
+
+print('Writting excel report...')
 df.to_excel(os.path.join(os.path.dirname(path), 'Generated_Report.xlsx'))
+
+print('Done! Closing...')
